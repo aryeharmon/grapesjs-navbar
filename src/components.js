@@ -5,6 +5,8 @@ export default (editor, opt = {}) => {
   const defaultModel = defaultType.model;
   const burgerType = 'burger-menu';
 
+  alert(c.labelBurger);
+
   dc.addType(burgerType, {
     model: defaultModel.extend({
       defaults: Object.assign({}, defaultModel.prototype.defaults, {
