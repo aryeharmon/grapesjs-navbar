@@ -5,8 +5,6 @@ export default (editor, opt = {}) => {
   const defaultModel = defaultType.model;
   const burgerType = 'burger-menu';
 
-  alert(c.labelBurger);
-
   dc.addType(burgerType, {
     model: defaultModel.extend({
       defaults: Object.assign({}, defaultModel.prototype.defaults, {
@@ -125,6 +123,43 @@ export default (editor, opt = {}) => {
         if(el.getAttribute &&
           el.getAttribute('data-gjs-type') == burgerType) {
           return {type: burgerType};
+        }
+      },
+    }),
+    view: defaultType.view,
+  });
+
+
+
+  dc.addType(burgerType, {
+    model: defaultModel.extend({
+      defaults: Object.assign({}, defaultModel.prototype.defaults, {
+        type: 'navigation',
+        tagName: 'nav',
+        traits: [
+          {
+            label: 'Address',
+            name: 'address',
+            placeholder: 'eg. London, UK',
+            changeProp: 1
+          },
+          {
+            type: 'select',
+            label: 'Map type',
+            name: 'mapType',
+            changeProp: 1,
+            options: [
+              { value: 'q', name: 'Roadmap' },
+              { value: 'w', name: 'Satellite' }
+            ]
+          },
+        ],
+      }),
+    }, {
+      isComponent(el) {
+        if(el.getAttribute &&
+          el.tagName == 'NAV') {
+          return {type: 'navigation'};
         }
       },
     }),
