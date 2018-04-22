@@ -129,36 +129,134 @@ export default (editor, opt = {}) => {
     view: defaultType.view,
   });
 
+  var animations = [
+    { value: 'bounce', name: 'bounce'},
+    { value: 'flash', name: 'flash'},
+    { value: 'pulse', name: 'pulse'},
+    { value: 'rubberBand', name: 'rubberBand'},
+    { value: 'shake', name: 'shake'},
+    { value: 'swing', name: 'swing'},
+    { value: 'tada', name: 'tada'},
+    { value: 'wobble', name: 'wobble'},
+    { value: 'jello', name: 'jello'},
+    { value: 'bounceIn', name: 'bounceIn'},
+    { value: 'bounceInDown', name: 'bounceInDown'},
+    { value: 'bounceInLeft', name: 'bounceInLeft'},
+    { value: 'bounceInRight', name: 'bounceInRight'},
+    { value: 'bounceInUp', name: 'bounceInUp'},
+    { value: 'bounceOut', name: 'bounceOut'},
+    { value: 'bounceOutDown', name: 'bounceOutDown'},
+    { value: 'bounceOutLeft', name: 'bounceOutLeft'},
+    { value: 'bounceOutRight', name: 'bounceOutRight'},
+    { value: 'bounceOutUp', name: 'bounceOutUp'},
+    { value: 'fadeIn', name: 'fadeIn'},
+    { value: 'fadeInDown', name: 'fadeInDown'},
+    { value: 'fadeInDownBig', name: 'fadeInDownBig'},
+    { value: 'fadeInLeft', name: 'fadeInLeft'},
+    { value: 'fadeInLeftBig', name: 'fadeInLeftBig'},
+    { value: 'fadeInRight', name: 'fadeInRight'},
+    { value: 'fadeInRightBig', name: 'fadeInRightBig'},
+    { value: 'fadeInUp', name: 'fadeInUp'},
+    { value: 'fadeInUpBig', name: 'fadeInUpBig'},
+    { value: 'fadeOut', name: 'fadeOut'},
+    { value: 'fadeOutDown', name: 'fadeOutDown'},
+    { value: 'fadeOutDownBig', name: 'fadeOutDownBig'},
+    { value: 'fadeOutLeft', name: 'fadeOutLeft'},
+    { value: 'fadeOutLeftBig', name: 'fadeOutLeftBig'},
+    { value: 'fadeOutRight', name: 'fadeOutRight'},
+    { value: 'fadeOutRightBig', name: 'fadeOutRightBig'},
+    { value: 'fadeOutUp', name: 'fadeOutUp'},
+    { value: 'fadeOutUpBig', name: 'fadeOutUpBig'},
+    { value: 'flip', name: 'flip'},
+    { value: 'flipInX', name: 'flipInX'},
+    { value: 'flipInY', name: 'flipInY'},
+    { value: 'flipOutX', name: 'flipOutX'},
+    { value: 'flipOutY', name: 'flipOutY'},
+    { value: 'lightSpeedIn', name: 'lightSpeedIn'},
+    { value: 'lightSpeedOut', name: 'lightSpeedOut'},
+    { value: 'rotateIn', name: 'rotateIn'},
+    { value: 'rotateInDownLeft', name: 'rotateInDownLeft'},
+    { value: 'rotateInDownRight', name: 'rotateInDownRight'},
+    { value: 'rotateInUpLeft', name: 'rotateInUpLeft'},
+    { value: 'rotateInUpRight', name: 'rotateInUpRight'},
+    { value: 'rotateOut', name: 'rotateOut'},
+    { value: 'rotateOutDownLeft', name: 'rotateOutDownLeft'},
+    { value: 'rotateOutDownRight', name: 'rotateOutDownRight'},
+    { value: 'rotateOutUpLeft', name: 'rotateOutUpLeft'},
+    { value: 'rotateOutUpRight', name: 'rotateOutUpRight'},
+    { value: 'slideInUp', name: 'slideInUp'},
+    { value: 'slideInDown', name: 'slideInDown'},
+    { value: 'slideInLeft', name: 'slideInLeft'},
+    { value: 'slideInRight', name: 'slideInRight'},
+    { value: 'slideOutUp', name: 'slideOutUp'},
+    { value: 'slideOutDown', name: 'slideOutDown'},
+    { value: 'slideOutLeft', name: 'slideOutLeft'},
+    { value: 'slideOutRight', name: 'slideOutRight'},
+    { value: 'zoomIn', name: 'zoomIn'},
+    { value: 'zoomInDown', name: 'zoomInDown'},
+    { value: 'zoomInLeft', name: 'zoomInLeft'},
+    { value: 'zoomInRight', name: 'zoomInRight'},
+    { value: 'zoomInUp', name: 'zoomInUp'},
+    { value: 'zoomOut', name: 'zoomOut'},
+    { value: 'zoomOutDown', name: 'zoomOutDown'},
+    { value: 'zoomOutLeft', name: 'zoomOutLeft'},
+    { value: 'zoomOutRight', name: 'zoomOutRight'},
+    { value: 'zoomOutUp', name: 'zoomOutUp'},
+    { value: 'hinge', name: 'hinge'},
+    { value: 'jackInTheBox', name: 'jackInTheBox'},
+    { value: 'rollIn', name: 'rollIn'},
+    { value: 'rollOut', name: 'rollOut'},
+  ];
 
 
-  dc.addType(burgerType, {
+
+  dc.addType('navigation', {
     model: defaultModel.extend({
       defaults: Object.assign({}, defaultModel.prototype.defaults, {
-        type: 'navigation',
-        tagName: 'nav',
+        type: 'navigation3',
+        tagName: 'dov',
         traits: [
           {
-            label: 'Address',
-            name: 'address',
-            placeholder: 'eg. London, UK',
-            changeProp: 1
+            type: 'number',
+            label: 'width',
+            name: 'width',
+            default: '300',
           },
           {
             type: 'select',
-            label: 'Map type',
-            name: 'mapType',
-            changeProp: 1,
+            label: 'animate-nav',
+            name: 'animate-nav',
             options: [
-              { value: 'q', name: 'Roadmap' },
-              { value: 'w', name: 'Satellite' }
+              { value: 'false', name: 'false' },
+              { value: 'true', name: 'true' },
             ]
+          },
+          {
+            type: 'select',
+            label: 'Direction',
+            name: 'direction',
+            options: [
+              { value: 'right', name: 'right' },
+              { value: 'left', name: 'left' },
+            ]
+          },
+          {
+            type: 'select',
+            label: 'Animation In',
+            name: 'animation-in',
+            options: animations,
+          },
+          {
+            type: 'select',
+            label: 'Animation Out',
+            name: 'animation-out',
+            options: animations,
           },
         ],
       }),
     }, {
       isComponent(el) {
-        if(el.getAttribute &&
-          el.tagName == 'NAV') {
+        if( el && $(el).hasClass('navbar-items-c')) {
           return {type: 'navigation'};
         }
       },
